@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", router);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((_req: Request, res: Response, _next: NextFunction) => {
   res.status(404).send("Not found");
 });
