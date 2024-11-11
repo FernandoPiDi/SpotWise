@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "npx esbuild src/index.ts --bundle --packages=external --format=esm --outdir=./dist",
     "start": "node dist/index.js",
     "dev": "tsx watch --env-file=./.env src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",

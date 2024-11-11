@@ -1,17 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ESNext",            // Using latest ECMAScript features
-    "module": "ESNext",            // Using ES modules
-    "moduleResolution": "Node", // Modern module resolution
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "esModuleInterop": true,
-    "allowJs": true,
+    "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "resolveJsonModule": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "sourceMap": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
