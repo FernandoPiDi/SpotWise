@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config(); // Load environment variables from .env file
 import { z } from "zod";
 
 const environmentSchema = z.object({
