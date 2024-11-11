@@ -30,6 +30,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./server
-          file: ./build/Dockerfile
+          file: ./server/build/Dockerfile
           push: true
           tags: ghcr.io/fernandopidi/spotwise-server:latest
