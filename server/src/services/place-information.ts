@@ -1,6 +1,6 @@
 import { WikipediaQueryRun } from "@langchain/community/tools/wikipedia_query_run";
 import { AzureChatOpenAI } from "@langchain/openai";
-import { appConfig } from "../configs/config";
+import { appConfig } from "../configs";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 

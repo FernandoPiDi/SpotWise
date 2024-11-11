@@ -7,7 +7,7 @@ import {
   Language,
   PlacesNearbyRanking,
 } from "@googlemaps/google-maps-services-js";
-import { appConfig } from "../../../configs/config";
+import { appConfig } from "../../../configs";
 import { getPlaceInformation } from "../../../services/place-information";
 
 export const recommendationsRouter = express.Router();

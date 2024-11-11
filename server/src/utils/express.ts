@@ -7,4 +7,3 @@ export function asyncHandler(
     handler(req, res).catch(next);
   };
 }
-

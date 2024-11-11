@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
-import cors from 'cors'; // Import the cors package
-import { appConfig } from "./configs/config";
+import cors from "cors"; // Import the cors package
+import { appConfig } from "./configs";
 import { router } from "./routes";
 // import fs from 'fs';
 // import https from 'https';
@@ -24,6 +24,6 @@ app.use((_req: Request, res: Response, _next: NextFunction) => {
 //   console.log(`Server is running on port ${appConfig.app.port} with HTTPS`);
 // });
 
-app.listen(appConfig.app.port, '0.0.0.0', () => {
+app.listen(appConfig.app.port, "0.0.0.0", () => {
   console.log("Server is running on port 3000");
 });
