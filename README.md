@@ -8,17 +8,17 @@ SpotWise is a mobile application that uses the current location of the people wh
 
 The user only needs to enter the application and allow the use of the current location and the application will automatically display relevant information about the current location:
 
-* Displays the name of a relevant nearby place: The app shows the name of a nearby location based on your current position.
+* **Displays the name of a relevant nearby place:** The app shows the name of a nearby location based on your current position.
 
-* Displays a photo of the nearby place: Each nearby location comes with an image, providing a visual representation of the place.
+* **Displays a photo of the nearby place:** Each nearby location comes with an image, providing a visual representation of the place.
 
-* Provides a button to redirect to Google Maps: A button allows users to open the selected location directly in Google Maps for further navigation.
+* **Provides a button to redirect to Google Maps:** A button allows users to open the selected location directly in Google Maps for further navigation.
 
-* Summarizes the location using an LLM: The app fetches a short summary of the location by querying Wikipedia, leveraging a Large Language Model (LLM) to generate and display the most relevant information about the place.
+* **Summarizes the location using an LLM:** The app fetches a short summary of the location by querying Wikipedia, leveraging a Large Language Model (LLM) to generate and display the most relevant information about the place.
 
-* Text-to-speech for the summary: The app includes a button that reads out the summary using the device's built-in text-to-speech feature.
+* **Text-to-speech for the summary:** The app includes a button that reads out the summary using the device's built-in text-to-speech feature.
 
-* Voice selection menu: A dropdown menu enables users to select or change the voice used for reading the summary, with options available based on the voices installed on the device.
+* **Voice selection menu:** A dropdown menu enables users to select or change the voice used for reading the summary, with options available based on the voices installed on the device.
 
 ## 🛠️ Tech stack
 
