@@ -1,23 +1,63 @@
-import React from "react";
-import { View, TouchableOpacity } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { View, TouchableOpacity, Animated } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import styles from "./styles";
 
-const BottomBar = ({ onReadSummary, onStopReading }) => {
+const BottomBar = ({ onToggleReading, isReading }) => {
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+  const colorAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (isReading) {
+      Animated.parallel([
+        Animated.timing(scaleAnim, {
+          toValue: 1.3,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(colorAnim, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    } else {
+      Animated.parallel([
+        Animated.timing(scaleAnim, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(colorAnim, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }
+  }, [isReading, colorAnim, scaleAnim]);
+
+  const backgroundColor = colorAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["#2196F3", "#4CAF50"],
+  });
+
   return (
     <View style={styles.containerB}>
-      <TouchableOpacity
-        style={[styles.roundButton, styles.playButton]}
-        onPress={onReadSummary}
+      <Animated.View
+        style={[
+          styles.roundButton,
+          { transform: [{ scale: scaleAnim }], backgroundColor },
+        ]}
       >
-        <MaterialIcons name="play-arrow" size={24} color="white" />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.roundButton, styles.pauseButton]}
-        onPress={onStopReading}
-      >
-        <MaterialIcons name="pause" size={24} color="white" />
-      </TouchableOpacity>
+        <TouchableOpacity onPress={onToggleReading}>
+          <MaterialIcons
+            name={isReading ? "pause" : "play-arrow"}
+            size={30}
+            color="white"
+          />
+        </TouchableOpacity>
+      </Animated.View>
     </View>
   );
 };

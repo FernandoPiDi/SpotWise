@@ -25,10 +25,14 @@ const styles = StyleSheet.create({
     fontSize: isLargeScreen ? 28 : 24,
     fontStyle: "italic",
     textAlign: "center",
-    marginTop: 0,
+    marginTop: -5,
+    marginLeft: -5,
+    marginRight: -5,
+    borderBottomLeftRadius: 15 /* Ajusta el valor según el nivel de redondeo que desees */,
+    borderBottomRightRadius: 15,
     backgroundColor: "rgba(173, 216, 230, 0.5)", // very light blue background with some transparency
-    padding: 5,
-    borderRadius: 5,
+    padding: 3,
+    //borderRadius: 20,
     borderWidth: 0, // no border
     fontFamily: "PlayfairDisplay_700Bold",
   },
@@ -37,7 +41,7 @@ const styles = StyleSheet.create({
     fontSize: isLargeScreen ? 28 : 24,
     fontStyle: "italic",
     textAlign: "center",
-    marginTop: 5,
+    marginTop: 3,
     backgroundColor: "rgba(173, 216, 230, 0.5)", // very light blue background with some transparency
     padding: 5,
     borderRadius: 25,
@@ -45,7 +49,7 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    padding: 10,
+    padding: 5,
     marginVertical: 0,
     backgroundColor: "#f9f9f9",
     borderRadius: 8,
@@ -61,25 +65,28 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: "100%",
+    //height: "100%",
+    height: isLargeScreen ? 480 : 420,
     resizeMode: "cover", // Adjust the image to cover the entire space without white borders
     borderRadius: 25,
   },
-  button: {
+  buttonMaps: {
     position: "absolute",
     top: 10,
     right: 10,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-    borderRadius: 20,
-    padding: 5,
+    borderRadius: 50,
+    padding: 12,
+    borderWidth: 0, // no border
   },
   summaryContainer: {
     width: "100%",
-    marginTop: 10,
-    borderRadius: 8,
-    paddingHorizontal: 10,
+    marginTop: 3,
+    borderRadius: 15,
+    padding: 10,
+    // paddingHorizontal: 10,
     justifyContent: "center",
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#e0e0e0",
   },
   summaryText: {
     fontSize: isLargeScreen ? 20 : 16,
@@ -87,7 +94,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   pickerContainer: {
-    marginTop: 10,
+    marginTop: 5,
     marginBottom: 60,
     width: "100%",
     alignItems: "center",
@@ -108,16 +115,18 @@ const styles = StyleSheet.create({
     top: 40,
     right: 20,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-    borderRadius: 20,
+    borderRadius: 30,
     padding: 10,
     zIndex: 1,
+    borderWidth: 1,
+    borderColor: "white",
   },
   containerB: {
     position: "absolute",
     bottom: 0,
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "center", // Center the button
     padding: 10,
     backgroundColor: "#fff",
     borderTopLeftRadius: 20,
@@ -131,11 +140,23 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  playButton: {
-    backgroundColor: "#4CAF50", // Green color for play button
+  // toggleButton: {
+  //   backgroundColor: "#2196F3", // Blue color for the toggle button
+  // },
+  placeNameStyle: {
+    color: "black",
+    fontSize: isLargeScreen ? 22 : 18,
+    fontStyle: "italic",
+    textAlign: "center",
+    marginTop: 3,
+    marginBottom: 3,
+    backgroundColor: "#f0f0f0", // Light gray background
+    padding: 10,
+    borderRadius: 20, // Rounded borders
   },
-  pauseButton: {
-    backgroundColor: "#f44336", // Red color for pause button
+  statusBar: {
+    barStyle: "light-content",
+    backgroundColor: "#000",
   },
 });
 

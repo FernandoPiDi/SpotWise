@@ -31,6 +31,7 @@ const PlaceCard = ({
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [isReading, setIsReading] = useState(false);
 
   // Load the fonts
   let [fontsLoaded] = useFonts({
@@ -69,12 +70,23 @@ const PlaceCard = ({
     setSelectedPhoto(null);
   };
 
+  const handleToggleReading = () => {
+    if (isReading) {
+      // Stop reading summary
+      // ...existing code to stop reading...
+    } else {
+      // Start reading summary
+      // ...existing code to start reading...
+    }
+    setIsReading(!isReading);
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.card}>
         <Text style={styles.titleStyle}>SpotWise</Text>
-        <Text style={styles.textStyle}>
-          Name Place: {singlePlace.displayName}
+        <Text style={styles.placeNameStyle}>
+          Place Name: {singlePlace.displayName}
         </Text>
 
         <View style={styles.imageContainer}>
@@ -88,8 +100,8 @@ const PlaceCard = ({
               </TouchableOpacity>
             ))}
 
-          <TouchableOpacity style={styles.button} onPress={handlePress}>
-            <MaterialIcons name="place" size={24} color="white" />
+          <TouchableOpacity style={styles.buttonMaps} onPress={handlePress}>
+            <MaterialIcons name="place" size={40} color="white" />
           </TouchableOpacity>
         </View>
 
@@ -116,6 +128,23 @@ const PlaceCard = ({
               />
             ))}
           </Picker>
+        </View>
+
+        {/* Button to toggle reading summary */}
+        <View style={styles.containerB}>
+          <TouchableOpacity
+            style={[
+              styles.roundButton,
+              isReading ? styles.pauseButton : styles.playButton,
+            ]}
+            onPress={handleToggleReading}
+          >
+            <MaterialIcons
+              name={isReading ? "stop" : "play-arrow"}
+              size={24}
+              color="white"
+            />
+          </TouchableOpacity>
         </View>
       </View>
 

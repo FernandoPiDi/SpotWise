@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, FlatList, Platform } from "react-native";
+import { View, FlatList, Platform, StatusBar } from "react-native";
 import PlaceCard from "../components/PlaceCard";
 import BottomBar from "../components/BottomBar";
 import * as Speech from "expo-speech";
@@ -8,6 +8,7 @@ const RecommendationsScreen = () => {
   const [places, setPlaces] = useState([]);
   const [availableVoices, setAvailableVoices] = useState([]); // Define the state for available voices
   const [selectedVoice, setSelectedVoice] = useState("");
+  const [isReading, setIsReading] = useState(false);
 
   useEffect(() => {
     const fetchRecommendations = async () => {
@@ -19,7 +20,14 @@ const RecommendationsScreen = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ lat: 7.137598, lng: -73.118782 }),
+            body: JSON.stringify({
+              lat: 52.516274574455444,
+              lng: 13.37776842524685,
+            }),
+            // body: JSON.stringify({
+            //   lat: 52.509332,
+            //   lng: 13.376739,
+            // }),
           }
         );
         const data = await response.json();
@@ -37,9 +45,9 @@ const RecommendationsScreen = () => {
         if (voices.length === 0) {
           console.warn("No se encontraron voces disponibles.");
         }
-        const englishVoices = voices.filter((voice) =>
-          voice.language.startsWith("en")
-        );
+        const englishVoices = voices
+          .filter((voice) => voice.language.startsWith("en"))
+          .slice(0, 10); // Limit to the first 10 voices
         console.log("voces disponibles en inglés:", englishVoices); // imprime solo las voces disponibles en inglés en la consola
         setAvailableVoices(englishVoices);
 
@@ -57,39 +65,42 @@ const RecommendationsScreen = () => {
     fetchVoices();
   }, []);
 
-  const handleReadSummary = () => {
+  const handleToggleReading = () => {
     const summaryText = places[0]?.summary;
-    if (summaryText) {
+    if (isReading) {
+      // Stop reading summary
       if (Platform.OS === "web") {
-        const utterance = new window.SpeechSynthesisUtterance(summaryText);
-        utterance.lang = "en-US";
-        window.speechSynthesis.speak(utterance);
+        window.speechSynthesis.cancel();
       } else {
-        if (selectedVoice) {
-          Speech.speak(summaryText, {
-            language: "en",
-            voice: selectedVoice,
-          });
-        } else {
-          // Usar voz predeterminada si no hay una voz seleccionada
-          Speech.speak(summaryText, {
-            language: "en",
-          });
-        }
+        Speech.stop();
       }
-    }
-  };
-
-  const handleStopReading = () => {
-    if (Platform.OS === "web") {
-      window.speechSynthesis.cancel();
+      setIsReading(false);
     } else {
-      Speech.stop();
+      // Start reading summary
+      if (summaryText) {
+        if (Platform.OS === "web") {
+          const utterance = new window.SpeechSynthesisUtterance(summaryText);
+          utterance.lang = "en-US";
+          //utterance.onend = () => setIsReading(false); // Reset button state when reading is finished
+          window.speechSynthesis.speak(utterance);
+        } else {
+          const options = {
+            language: "en",
+            onDone: () => setIsReading(false), // Reset button state when reading is finished
+          };
+          if (selectedVoice) {
+            options.voice = selectedVoice;
+          }
+          Speech.speak(summaryText, options);
+        }
+        setIsReading(true);
+      }
     }
   };
 
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar />
       <FlatList
         data={places}
         keyExtractor={(item) => item.displayName}
@@ -106,10 +117,7 @@ const RecommendationsScreen = () => {
           />
         )}
       />
-      <BottomBar
-        onReadSummary={handleReadSummary}
-        onStopReading={handleStopReading}
-      />
+      <BottomBar onToggleReading={handleToggleReading} isReading={isReading} />
     </View>
   );
 };
